@@ -365,14 +365,6 @@ module TaggableTags
   end
   
   desc %{
-    page:link to help disambiguate the tag:link
-  }
-  tag "page:link" do |tag|
-    raise tag.nesting
-    tag.render("link")
-  end
-
-  desc %{
     Shows description of current tag.
     
     *Usage:* 
