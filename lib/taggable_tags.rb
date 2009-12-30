@@ -344,7 +344,7 @@ module TaggableTags
     *Usage:* 
     <pre><code><r:tag:link linkto='/library' /></code></pre>
   }
-  tag 'tag:link' do |tag|
+  tag 'tag:tag_link' do |tag|
     raise TagError, "tag must be defined for tag:link tag" unless tag.locals.tag
     options = tag.attr.dup
     anchor = options['anchor'] ? "##{options.delete('anchor')}" : ''
@@ -362,6 +362,14 @@ module TaggableTags
     end
 
     %{<a href="#{href}#{anchor}"#{attributes}>#{text}</a>}
+  end
+  
+  desc %{
+    page:link to help disambiguate the tag:link
+  }
+  tag "page:link" do |tag|
+    raise tag.nesting
+    tag.render("link")
   end
 
   desc %{
