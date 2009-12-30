@@ -352,7 +352,7 @@ module TaggableTags
     attributes = " #{attributes}" unless attributes.empty?
     text = tag.double? ? tag.expand : tag.render('tag:name')
 
-    if defined? LibraryPage && tag.locals.page.is_a?(LibraryPage)
+    if defined?(LibraryPage) && tag.locals.page.is_a?(LibraryPage)
       href = tag.locals.page.tagged_url(tag.locals.page.requested_tags + [tag.locals.tag])
     elsif page_url = (options.delete('linkto') || Radiant::Config['library.path'])
       href = clean_url(page_url + '/' + tag.locals.tag.clean_title)
@@ -438,6 +438,7 @@ private
     if tag.locals.page.is_a?(LibraryPage)
       tag.locals.tag ||= tag.locals.page.requested_tags.first
     end
+    return tag.locals.tag
   end
   
   # this is the default used for bare tags:* tags.
